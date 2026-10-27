@@ -1,0 +1,620 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>EPS Salidas</title>
+<style>
+  /* Layout: portal institucional de salud */
+  :root {
+    --bg: #f4f6f8;
+    --surface: #ffffff;
+    --ink: #142a3f;
+    --ink-soft: #4a6076;
+    --line: #dce4ec;
+    --brand: #0a7d6b;
+    --brand-deep: #065b4e;
+    --brand-tint: #e6f3f0;
+    --accent: #1f6fb2;
+    --warn: #c0392b;
+    --warn-bg: #fdecea;
+    --field-bg: #fbfcfd;
+    color-scheme: light only;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    line-height: 1.5;
+  }
+
+  .wrap {
+    max-width: 440px;
+    margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  /* ---- Barra superior utilitaria ---- */
+  .topbar { background: var(--brand-deep); color: #eafaf6; font-size: 0.78rem; }
+  .topbar .wrap {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;
+    padding-block: 7px;
+  }
+  .topbar a { color: #eafaf6; text-decoration: none; opacity: 0.9; }
+  .topbar .links { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* ---- Cabecera de marca ---- */
+  header.brand { background: var(--surface); border-bottom: 1px solid var(--line); }
+  header.brand .wrap {
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+    padding-block: 16px;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .logo .mark {
+    width: 46px; height: 46px; flex: none; border-radius: 11px;
+    background: linear-gradient(135deg, var(--brand), var(--accent));
+    display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 1.15rem; letter-spacing: 0.5px;
+  }
+  .logo .name { font-size: 1.28rem; font-weight: 800; color: var(--ink); line-height: 1.1; }
+  .logo .tag { font-size: 0.72rem; color: var(--ink-soft); letter-spacing: 1.5px; text-transform: uppercase; }
+  .afiliado-btn {
+    background: var(--brand); color: #fff; border: none; border-radius: 8px;
+    padding: 10px 18px; font-size: 0.85rem; font-weight: 700; cursor: pointer; white-space: nowrap;
+  }
+
+  /* ---- Nav ---- */
+  nav.main { background: var(--brand); }
+  nav.main .wrap {
+    display: flex; gap: 2px; flex-wrap: nowrap; padding-block: 0;
+    overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  nav.main .wrap::-webkit-scrollbar { display: none; }
+  nav.main a {
+    color: #eafaf6; text-decoration: none; font-size: 0.85rem; font-weight: 600;
+    padding: 12px 13px; display: block; white-space: nowrap;
+  }
+  nav.main a.active, nav.main a:hover { background: var(--brand-deep); }
+
+  /* ---- Banner ---- */
+  .banner {
+    position: relative; overflow: hidden;
+    max-width: 440px; margin: 0 auto;
+    min-height: 168px; display: flex; align-items: flex-end;
+    background-image: linear-gradient(90deg, rgba(6,91,78,0.92) 0%, rgba(6,91,78,0.62) 45%, rgba(6,91,78,0.15) 100%), url("banner.jpg");
+    background-size: cover; background-position: center;
+  }
+  .banner .wrap { padding-block: 18px; color: #fff; }
+  .banner .eyebrow {
+    display: inline-block; font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase;
+    background: rgba(255,255,255,0.18); padding: 3px 9px; border-radius: 20px; margin-bottom: 8px;
+  }
+  .banner h2 {
+    margin: 0 0 6px; font-size: 1.35rem; line-height: 1.15; text-wrap: balance;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+  .banner p {
+    margin: 0; font-size: 0.82rem; max-width: 30ch; opacity: 0.95;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+
+  /* ---- Banda de alerta ---- */
+  .alert {
+    background: var(--warn-bg); border-left: 5px solid var(--warn);
+    margin-top: 18px; border-radius: 6px;
+  }
+  .alert .wrap { padding-block: 13px; display: flex; gap: 12px; align-items: flex-start; }
+  .alert .ico { color: var(--warn); font-size: 1.3rem; flex: none; line-height: 1.2; }
+  .alert h2 { margin: 0 0 3px; font-size: 0.98rem; color: var(--warn); }
+  .alert p { margin: 0; font-size: 0.86rem; color: var(--ink-soft); }
+
+  /* ---- Cuerpo ---- */
+  main { padding-block: 26px 40px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 22px; align-items: start; }
+
+  .intro h1 { font-size: 1.5rem; margin: 0 0 10px; color: var(--ink); line-height: 1.2; text-wrap: balance; }
+  .intro p { color: var(--ink-soft); font-size: 0.92rem; margin: 0 0 14px; }
+  .intro ul { padding-left: 18px; margin: 0; color: var(--ink-soft); font-size: 0.88rem; }
+  .intro li { margin-bottom: 7px; }
+  .deadline {
+    margin-top: 18px; background: var(--brand-tint); border-radius: 8px; padding: 14px 16px;
+    font-size: 0.86rem; color: var(--brand-deep);
+  }
+  .deadline strong { color: var(--brand-deep); }
+
+  /* ---- Formulario (el gancho) ---- */
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 22px; box-shadow: 0 6px 22px rgba(20,42,63,0.06);
+  }
+  .card h3 { margin: 0 0 4px; font-size: 1.1rem; color: var(--ink); }
+  .card .sub { margin: 0 0 18px; font-size: 0.82rem; color: var(--ink-soft); }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+  .field input, .field select {
+    width: 100%; padding: 10px 12px; font-size: 0.9rem; font-family: inherit;
+    background: var(--field-bg); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 7px;
+  }
+  .field input:focus, .field select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 420px) { .row2 { grid-template-columns: 1fr; } }
+  .submit {
+    width: 100%; margin-top: 6px; background: var(--brand); color: #fff; border: none;
+    border-radius: 8px; padding: 13px; font-size: 0.95rem; font-weight: 700; cursor: pointer;
+  }
+  .submit:hover { background: var(--brand-deep); }
+  .finelock { margin-top: 12px; font-size: 0.72rem; color: var(--ink-soft); text-align: center; }
+
+  footer { border-top: 1px solid var(--line); background: var(--surface); }
+  footer .wrap { padding-block: 18px; font-size: 0.76rem; color: var(--ink-soft); }
+
+  /* =========================================================
+     ---- NUEVO OVERLAY DE REVELACIÓN INTERACTIVO Y ANIMADO ----
+     ========================================================= */
+  .reveal {
+    position: fixed; inset: 0; z-index: 100;
+    background: radial-gradient(circle at top right, #1f2937, #0f172a 80%);
+    color: #f8fafc; overflow-y: auto;
+    padding: max(24px, env(safe-area-inset-top,0px)) max(16px, env(safe-area-inset-right,0px)) max(24px, env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-left,0px));
+  }
+  
+  .reveal-container {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Header animado */
+  .reveal-header {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 28px 20px;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reveal-header::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .pulse-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  }
+
+  .reveal-header h2 {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    margin: 0 0 10px;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  .reveal-header p {
+    font-size: 0.98rem;
+    color: #cbd5e1;
+    margin: 0 auto;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  /* Grid Informativo de Señales */
+  .section-title {
+    font-size: 1.1rem;
+    color: #38bdf8;
+    margin: 0 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .info-card {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px 18px;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .info-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(56, 189, 248, 0.4);
+    background: rgba(30, 41, 59, 0.95);
+  }
+
+  .info-card .card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .info-card .icon-box {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+    display: grid; place-items: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .info-card h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #f1f5f9;
+    font-weight: 700;
+  }
+
+  .info-card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    line-height: 1.5;
+  }
+
+  /* Sección: Anatomía del Angler Phishing */
+  .flow-box {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 18px;
+  }
+
+  .flow-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .step-item {
+    background: rgba(30, 41, 59, 0.5);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    color: #cbd5e1;
+    border-left: 3px solid #ec4899;
+  }
+
+  .step-item strong {
+    display: block;
+    color: #f472b6;
+    margin-bottom: 3px;
+    font-size: 0.85rem;
+  }
+
+  /* Mini estadísticas */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    text-align: center;
+  }
+
+  @media (max-width: 500px) {
+    .stats-row { grid-template-columns: 1fr; }
+  }
+
+  .stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .stat-card .num {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #34d399;
+  }
+
+  .stat-card .lbl {
+    font-size: 0.74rem;
+    color: #94a3b8;
+  }
+
+  /* Botón de reinicio */
+  .actions {
+    text-align: center;
+    padding-top: 8px;
+  }
+
+  .restart {
+    background: linear-gradient(135deg, #0284c7, #0d9488);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 32px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .restart:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+  }
+</style>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Línea única nacional: 01 8000 000 000 · Lun a Sáb</span>
+    <span class="links"><a href="#">Portal del afiliado</a><a href="#">PQRS</a><a href="#">Mapa de sedes</a></span>
+  </div>
+</div>
+
+<header class="brand">
+  <div class="wrap">
+    <div class="logo">
+      <div class="mark">S+</div>
+      <div>
+        <div class="name">EPS Salidas</div>
+        <div class="tag">Entidad Promotora de Salud</div>
+      </div>
+    </div>
+    <button class="afiliado-btn" type="button">Ingresar a mi cuenta</button>
+  </div>
+</header>
+
+<nav class="main">
+  <div class="wrap">
+    <a href="#">Inicio</a>
+    <a href="#">Afiliados</a>
+    <a href="#">Red de atención</a>
+    <a href="#" class="active">Gestores farmacéuticos</a>
+    <a href="#">Autorizaciones</a>
+    <a href="#">Contáctanos</a>
+  </div>
+</nav>
+
+<section class="banner">
+  <div class="wrap">
+    <span class="eyebrow">Afiliados</span>
+    <h2>Cambios de gestor farmacéutico</h2>
+    <p>Información sobre el cambio de operador para la entrega de tus medicamentos (PBS y No PBS).</p>
+  </div>
+</section>
+
+<div class="alert">
+  <div class="wrap">
+    <span class="ico" aria-hidden="true">&#9888;</span>
+    <div>
+      <h2>Actualización obligatoria de datos del afiliado</h2>
+      <p>Por el cambio de gestor farmacéutico, debes validar tus datos antes del vencimiento para no perder la entrega de tus medicamentos.</p>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap grid">
+    <section class="intro">
+      <h1>Validación de afiliación — Nuevo gestor farmacéutico</h1>
+      <p>A partir del próximo mes, la dispensación de medicamentos PBS y No PBS cambia de operador en tu municipio. Para garantizar la continuidad de tu tratamiento, confirma tu identidad en el formulario.</p>
+      <ul>
+        <li>No necesitas una nueva fórmula médica ni autorización.</li>
+        <li>La validación toma menos de 2 minutos.</li>
+        <li>Recibirás por mensaje el nombre de tu nueva farmacia asignada.</li>
+      </ul>
+      <div class="deadline">
+        <strong>Importante:</strong> si no validas tus datos antes de la fecha límite, la entrega de tus medicamentos podría suspenderse temporalmente.
+      </div>
+    </section>
+
+    <section>
+      <form class="card" id="phishForm" novalidate autocomplete="off">
+        <h3>Confirma tu identidad</h3>
+        <p class="sub">Todos los campos son obligatorios para validar tu afiliación.</p>
+
+        <div class="row2">
+          <div class="field">
+            <label for="nombre">Nombres</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej: María Fernanda">
+          </div>
+          <div class="field">
+            <label for="apellido">Apellidos</label>
+            <input type="text" id="apellido" name="apellido" placeholder="Ej: Gómez Ruiz">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="documento">Número de documento</label>
+          <input type="text" id="documento" name="documento" inputmode="numeric" placeholder="Cédula de ciudadanía">
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="expedicion">Fecha de expedición</label>
+            <input type="date" id="expedicion" name="expedicion">
+          </div>
+          <div class="field">
+            <label for="nacimiento">Fecha de nacimiento</label>
+            <input type="date" id="nacimiento" name="nacimiento">
+          </div>
+        </div>
+
+        <button type="submit" class="submit">Validar mis datos</button>
+        <div class="finelock">&#128274; Conexión segura · Tus datos están protegidos</div>
+      </form>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    EPS Salidas — Entidad ficticia creada únicamente para un ejercicio educativo de concientización sobre phishing. No es una entidad real y no presta ningún servicio de salud.
+  </div>
+</footer>
+
+<!-- ===== Revelación Interactiva e Informativa ===== -->
+<div class="reveal" id="reveal" hidden role="alertdialog" aria-modal="true" aria-labelledby="revealTitle">
+  <div class="reveal-container">
+    
+    <!-- Encabezado Principal -->
+    <header class="reveal-header">
+      <div class="pulse-badge">
+        <span>&#9888;</span> Simulacro de Ciberseguridad
+      </div>
+      <h2 id="revealTitle">¡Caíste en la trampa de Angler Phishing!</h2>
+      <p>
+        ¡Tranquilo! Tus datos <strong>no fueron guardados ni enviados</strong>. Este fue un ejercicio interactivo para mostrarte lo fácil que es caer en un engaño digital bien diseñado.
+      </p>
+    </header>
+
+    <!-- Estadísticas Rápidas -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="num">85%</div>
+        <div class="lbl">Ataques inician con un clic confuso</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">&lt; 2 min</div>
+        <div class="lbl">Tarda un ciberdelincuente en clonar un sitio web</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">100%</div>
+        <div class="lbl">Prevenible al verificar la URL original</div>
+      </div>
+    </div>
+
+    <!-- ¿Cómo funciona? Flow Box -->
+    <div class="flow-box">
+      <div class="section-title">
+        <span>&#128373;</span> ¿Cómo funciona el Angler Phishing?
+      </div>
+      <div class="flow-steps">
+        <div class="step-item">
+          <strong>1. La Carnada</strong>
+          Publicas una queja o comentario en redes sociales sobre un servicio.
+        </div>
+        <div class="step-item">
+          <strong>2. El Falso Soporte</strong>
+          Una cuenta bot impura te contacta de inmediato haciéndose pasar por la marca.
+        </div>
+        <div class="step-item">
+          <strong>3. El Enlace Trampa</strong>
+          Te envían a una web idéntica a la oficial (como esta) para pedirte datos sensibles.
+        </div>
+      </div>
+    </div>
+
+    <!-- Las Banderas Rojas (Señales de alerta) -->
+    <div>
+      <div class="section-title">
+        <span>&#128681;</span> 4 Banderas Rojas que debiste notar
+      </div>
+      
+      <div class="cards-grid">
+        <div class="info-card">
+          <div class="card-head">
+            <div class="icon-box">&#128100;</div>
+            <h4>Perfil Falso de Soporte</h4>
+          </div>
+          <p>La cuenta que te escribió suele tener letras cambiadas, guiones extra y carece de la insignia de verificación oficial.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="card-head">
+            <div class="icon-box">&#12519;</div>
+            <h4>Sacarte de la plataforma</h4>
+          </div>
+          <p>Te llevan rápidamente fuera del canal oficial hacia enlaces externos o chats privados no monitoreados.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="card-head">
+            <div class="icon-box">&#9200;</div>
+            <h4>Sentido de Urgencia Ficticio</h4>
+          </div>
+          <p>Usan frases como <em>"vence hoy"</em> o <em>"perderás tu servicio"</em> para obligarte a actuar sin reflexionar.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="card-head">
+            <div class="icon-box">&#128179;</div>
+            <h4>Petición de Datos Excesivos</h4>
+          </div>
+          <p>Piden fechas de expedición de documento o claves que una atención de soporte común jamás necesitaría en primer contacto.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reglas de Oro -->
+    <div class="info-card" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3);">
+      <div class="section-title" style="color: #34d399; margin-bottom: 6px;">
+        <span>&#128737;</span> Tu Escudo de Protección:
+      </div>
+      <p style="color: #e2e8f0; font-size: 0.88rem;">
+        Nunca uses los enlaces que te envíen por mensaje directo tras un reclamo. <strong>Escribe tú mismo la dirección oficial de la entidad en el navegador</strong> o llama a los números telefónicos impresos al respaldo de tu carné.
+      </p>
+    </div>
+
+    <!-- Botón Acción -->
+    <div class="actions">
+      <button class="restart" type="button" id="restart">Entendido, reiniciar prueba</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    var form = document.getElementById('phishForm');
+    var reveal = document.getElementById('reveal');
+    var restart = document.getElementById('restart');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();          // nunca envía a ningún lado
+      form.reset();                // borra todo lo escrito, no se conserva nada
+      reveal.hidden = false;
+      reveal.scrollTop = 0;
+      restart.focus();
+    });
+
+    restart.addEventListener('click', function () {
+      reveal.hidden = true;
+      document.getElementById('nombre').focus();
+    });
+  })();
+</script>
